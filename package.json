@@ -5,9 +5,9 @@
   "scripts": {
     "build": "rm -rf dist && webpack --mode development",
     "start-dist": "node ./dist/server.js",
-    "test": "mocha ./dependencies/*"
+    "test": "mocha ./test/*"
   },
-  "test": {
+  "dependencies": {
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
