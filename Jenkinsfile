@@ -39,5 +39,25 @@ node {
                 }
             } 
         }
+    }
+
+    docker.image("maven").inside {
+        stage("Release to Nexus") {
+            withCredentials([usernamePassword(credentialsId: 'nexus', 
+                                        usernameVariable: 'NEXUS_USERNAME', 
+                                        passwordVariable: 'NEXUS_PASSWORD')]) {
+                sh "mvn deploy:deploy-file \
+                    -DgroupId=it.etiqa \
+                    -DartifactId=webinar-project \
+                    -Dversion=${version} \
+                    -Dpackaging=tar.gz \
+                    -Dfile=dist.tar.gz \
+                    -DgeneratePom=true \
+                    -DupdateReleaseInfo=true \
+                    -Durl='http://${NEXUS_USERNAME}:${NEXUS_PASSWORD}@host.docker.internal:8081/repository/maven-releases'"
+
+            }
+        }
     }    
+
 }
