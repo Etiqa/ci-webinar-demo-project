@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "rm -rf dist && webpack --mode development",
+    "build": "rm -rf dist && webpack --mode production",
     "start-dist": "node ./dist/server.js",
     "test": "mocha ./test/*"
   },
